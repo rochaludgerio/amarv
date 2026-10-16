@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="maui_amarv.Views.CadastroPaciente"
+             Title="Cadastro de Paciente"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{StaticResource Gray100}">
+
+    <Grid>
+        <!-- Marca d'água -->
+        <Image Source="amarv_logo.png"
+               Opacity="0.06"
+               Aspect="AspectFit"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               InputTransparent="True" />
+
+        <ScrollView>
+            <VerticalStackLayout Padding="20"
+                                 Spacing="15">
+
+                <Label Text="Cadastro de Paciente"
+                       FontSize="30"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource Primary}"
+                       HorizontalTextAlignment="Center"
+                       Margin="0,10" />
+
+                <!-- Identificação da pessoa -->
+                <Frame Padding="15"
+                       BackgroundColor="White"
+                       BorderColor="#E0E0E0"
+                       CornerRadius="12">
+
+                    <VerticalStackLayout Spacing="12">
+
+                        <Label Text="Identificação da pessoa"
+                               FontSize="18"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource Primary}" />
+
+                        <Label Text="Pessoa cadastrada" />
+
+                        <Picker x:Name="pck_pessoa"
+                                Title="Selecione uma pessoa"
+                                ItemDisplayBinding="{Binding Nome}"
+                                SelectedIndexChanged="Pck_Pessoa_SelectedIndexChanged" />
+
+                        <Button Text="Consultar pessoas cadastradas"
+                                Clicked="Button_Consultar_Clicked"
+                                BackgroundColor="#607D8B"
+                                TextColor="White"
+                                CornerRadius="10"
+                                HeightRequest="45" />
+
+                        <BoxView HeightRequest="1"
+                                 BackgroundColor="#E0E0E0" />
+
+                        <Label Text="Nome completo" />
+                        <Entry x:Name="entry_nome"
+                               IsReadOnly="True"
+                               Placeholder="Nome da pessoa" />
+
+                        <Label Text="CPF" />
+                        <Entry x:Name="entry_cpf"
+                               IsReadOnly="True"
+                               Keyboard="Numeric"
+                               Placeholder="CPF da pessoa" />
+
+                        <Label Text="Nome da mãe" />
+                        <Entry x:Name="entry_nome_mae"
+                               IsReadOnly="True"
+                               Placeholder="Nome da mãe" />
+
+                        <Label Text="Telefone" />
+                        <Entry x:Name="entry_telefone"
+                               IsReadOnly="True"
+                               Keyboard="Telephone"
+                               Placeholder="Telefone" />
+
+                        <Label Text="Endereço" />
+                        <Entry x:Name="entry_endereco"
+                               IsReadOnly="True"
+                               Placeholder="Endereço" />
+
+                        <Label Text="Os dados pessoais são consultados da tabela Pessoa."
+                               FontSize="12"
+                               TextColor="#607D8B" />
+
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Informações do paciente -->
+                <Frame Padding="15"
+                       BackgroundColor="White"
+                       BorderColor="#E0E0E0"
+                       CornerRadius="12">
+
+                    <VerticalStackLayout Spacing="12">
+
+                        <Label Text="Informações do paciente"
+                               FontSize="18"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource Primary}" />
+
+                        <Label Text="Sexo *" />
+
+                        <Picker x:Name="pck_sexo"
+                                Title="Selecione o sexo">
+                            <Picker.Items>
+                                <x:String>Feminino</x:String>
+                                <x:String>Masculino</x:String>
+                                <x:String>Não informado</x:String>
+                            </Picker.Items>
+                        </Picker>
+
+                        <Label Text="Idade em anos *" />
+                        <Entry x:Name="entry_idade_anos"
+                               Placeholder="Informe a idade em anos"
+                               Keyboard="Numeric"
+                               MaxLength="3" />
+
+                        <Label Text="Meses adicionais (0 a 11)" />
+                        <Entry x:Name="entry_idade_meses"
+                               Placeholder="Informe os meses adicionais"
+                               Keyboard="Numeric"
+                               MaxLength="2" />
+
+                        <Label Text="Cartão Nacional de Saúde (CNS)" />
+                        <Entry x:Name="entry_cartao_sus"
+                               Placeholder="Número do Cartão SUS"
+                               Keyboard="Numeric"
+                               MaxLength="20" />
+
+                        <Label Text="A idade informada será utilizada para calcular uma data de nascimento estimada."
+                               FontSize="12"
+                               TextColor="#607D8B" />
+
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Condições clínicas -->
+                <Frame Padding="15"
+                       BackgroundColor="White"
+                       BorderColor="#E0E0E0"
+                       CornerRadius="12">
+
+                    <VerticalStackLayout Spacing="12">
+
+                        <Label Text="Condições clínicas e situações especiais"
+                               FontSize="18"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource Primary}" />
+
+                        <Label Text="Selecione as condições aplicáveis ao paciente." />
+
+                        <Grid ColumnDefinitions="Auto,*"
+                              ColumnSpacing="8">
+                            <CheckBox x:Name="chk_nenhuma"
+                                      Grid.Column="0"
+                                      CheckedChanged="Condicao_CheckedChanged" />
+                            <Label Grid.Column="1"
+                                   Text="Nenhuma condição informada"
+                                   VerticalOptions="Center" />
+                        </Grid>
+
+                        <BoxView HeightRequest="1"
+                                 BackgroundColor="#E0E0E0" />
+
+                        <Grid ColumnDefinitions="Auto,*"
+                              ColumnSpacing="8">
+                            <CheckBox x:Name="chk_gestante"
+                                      Grid.Column="0"
+                                      CheckedChanged="Condicao_CheckedChanged" />
+                            <Label Grid.Column="1"
+                                   Text="Gestante"
+                                   VerticalOptions="Center" />
+                        </Grid>
+
+                        <Label Text="Semanas de gestação" />
+                        <Entry x:Name="entry_semanas_gestacao"
+                               Placeholder="Informe de 1 a 45 semanas"
+                               Keyboard="Numeric"
+                               MaxLength="2"
+                               IsEnabled="False" />
+
+                        <Grid ColumnDefinitions="Auto,*"
+                              ColumnSpacing="8">
+                            <CheckBox x:Name="chk_lactante"
+                                      Grid.Column="0"
+                                      CheckedChanged="Condicao_CheckedChanged" />
+                            <Label Grid.Column="1"
+                                   Text="Lactante"
+                                   VerticalOptions="Center" />
+                        </Grid>
+
+                        <Grid ColumnDefinitions="Auto,*"
+                              ColumnSpacing="8">
+                            <CheckBox x:Name="chk_lactante_bebe"
+                                      Grid.Column="0"
+                                      CheckedChanged="Condicao_CheckedChanged" />
+                            <Label Grid.Column="1"
+                                   Text="Lactante com bebê menor de 6 meses"
+                                   VerticalOptions="Center" />
+                        </Grid>
+
+                        <Grid ColumnDefinitions="Auto,*"
+                              ColumnSpacing="8">
+                            <CheckBox x:Name="chk_profissional_saude"
+                                      Grid.Column="0"
+                                      CheckedChanged="Condicao_CheckedChanged" />
+                            <Label Grid.Column="1"
+                                   Text="Profissional de saúde"
+                                   VerticalOptions="Center" />
+                        </Grid>
+
+                        <Grid ColumnDefinitions="Auto,*"
+                              ColumnSpacing="8">
+                            <CheckBox x:Name="chk_indigena"
+                                      Grid.Column="0"
+                                      CheckedChanged="Condicao_CheckedChanged" />
+                            <Label Grid.Column="1"
+                                   Text="Pessoa indígena"
+                                   VerticalOptions="Center" />
+                        </Grid>
+
+                        <Grid ColumnDefinitions="Auto,*"
+                              ColumnSpacing="8">
+                            <CheckBox x:Name="chk_acamado"
+                                      Grid.Column="0"
+                                      CheckedChanged="Condicao_CheckedChanged" />
+                            <Label Grid.Column="1"
+                                   Text="Acamado ou institucionalizado"
+                                   VerticalOptions="Center" />
+                        </Grid>
+
+                        <Grid ColumnDefinitions="Auto,*"
+                              ColumnSpacing="8">
+                            <CheckBox x:Name="chk_imunossuprimido"
+                                      Grid.Column="0"
+                                      CheckedChanged="Condicao_CheckedChanged" />
+                            <Label Grid.Column="1"
+                                   Text="Imunossuprimido ou imunodeficiência"
+                                   VerticalOptions="Center" />
+                        </Grid>
+
+                        <Grid ColumnDefinitions="Auto,*"
+                              ColumnSpacing="8">
+                            <CheckBox x:Name="chk_hiv"
+                                      Grid.Column="0"
+                                      CheckedChanged="Condicao_CheckedChanged" />
+                            <Label Grid.Column="1"
+                                   Text="HIV"
+                                   VerticalOptions="Center" />
+                        </Grid>
+
+                        <Grid ColumnDefinitions="Auto,*"
+                              ColumnSpacing="8">
+                            <CheckBox x:Name="chk_quimioterapia"
+                                      Grid.Column="0"
+                                      CheckedChanged="Condicao_CheckedChanged" />
+                            <Label Grid.Column="1"
+                                   Text="Em quimioterapia"
+                                   VerticalOptions="Center" />
+                        </Grid>
+
+                        <Grid ColumnDefinitions="Auto,*"
+                              ColumnSpacing="8">
+                            <CheckBox x:Name="chk_transplante"
+                                      Grid.Column="0"
+                                      CheckedChanged="Condicao_CheckedChanged" />
+                            <Label Grid.Column="1"
+                                   Text="Transplantado"
+                                   VerticalOptions="Center" />
+                        </Grid>
+
+                        <Grid ColumnDefinitions="Auto,*"
+                              ColumnSpacing="8">
+                            <CheckBox x:Name="chk_corticoide"
+                                      Grid.Column="0"
+                                      CheckedChanged="Condicao_CheckedChanged" />
+                            <Label Grid.Column="1"
+                                   Text="Uso de corticoide ou imunobiológico"
+                                   VerticalOptions="Center" />
+                        </Grid>
+
+                        <Grid ColumnDefinitions="Auto,*"
+                              ColumnSpacing="8">
+                            <CheckBox x:Name="chk_alergia"
+                                      Grid.Column="0"
+                                      CheckedChanged="Condicao_CheckedChanged" />
+                            <Label Grid.Column="1"
+                                   Text="Alergia grave ou anafilaxia"
+                                   VerticalOptions="Center" />
+                        </Grid>
+
+                        <Grid ColumnDefinitions="Auto,*"
+                              ColumnSpacing="8">
+                            <CheckBox x:Name="chk_febre"
+                                      Grid.Column="0"
+                                      CheckedChanged="Condicao_CheckedChanged" />
+                            <Label Grid.Column="1"
+                                   Text="Febre, infecção ou doença aguda"
+                                   VerticalOptions="Center" />
+                        </Grid>
+
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Botões -->
+                <Button x:Name="btn_salvar_paciente"
+                        Text="Salvar Cadastro do Paciente"
+                        Clicked="Button_Clicked"
+                        BackgroundColor="{StaticResource Primary}"
+                        TextColor="White"
+                        CornerRadius="10"
+                        HeightRequest="50" />
+
+                <Button Text="Consultar Histórico Vacinal"
+                        Clicked="Button_ConsultarHistorico_Clicked"
+                        BackgroundColor="#607D8B"
+                        TextColor="White"
+                        CornerRadius="10"
+                        HeightRequest="50" />
+
+                <Button Text="Voltar ao Menu"
+                        Clicked="Button_Menu_Clicked"
+                        BackgroundColor="#E0E0E0"
+                        TextColor="Black"
+                        CornerRadius="10"
+                        HeightRequest="48" />
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

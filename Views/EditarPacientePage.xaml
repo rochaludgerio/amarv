@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="maui_amarv.Views.EditarPacientePage"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{StaticResource Gray100}">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20"
+                             Spacing="15">
+
+            <Label Text="Editar Paciente"
+                   FontSize="32"
+                   FontAttributes="Bold"
+                   TextColor="{StaticResource Primary}"
+                   HorizontalTextAlignment="Center" />
+
+            <Frame Padding="15">
+                <VerticalStackLayout Spacing="12">
+
+                    <Label Text="Nome do paciente:" />
+                    <Entry x:Name="entry_nome" />
+
+                    <Label Text="Idade em anos:" />
+                    <Entry x:Name="entry_idade_anos"
+                           Keyboard="Numeric" />
+
+                    <Label Text="Meses adicionais:" />
+                    <Entry x:Name="entry_idade_meses"
+                           Keyboard="Numeric" />
+
+                    <Label Text="Condição clínica:" />
+                    <Entry x:Name="entry_condicao" />
+
+                    <Label Text="Situações especiais"
+                           FontAttributes="Bold"
+                           FontSize="20"
+                           TextColor="{StaticResource Primary}" />
+
+                    <HorizontalStackLayout>
+                        <CheckBox x:Name="chk_profissional_saude" />
+                        <Label Text="Profissional de saúde" />
+                    </HorizontalStackLayout>
+
+                    <HorizontalStackLayout>
+                        <CheckBox x:Name="chk_indigena" />
+                        <Label Text="Pessoa indígena" />
+                    </HorizontalStackLayout>
+
+                    <HorizontalStackLayout>
+                        <CheckBox x:Name="chk_acamado" />
+                        <Label Text="Acamado / institucionalizado" />
+                    </HorizontalStackLayout>
+
+                    <HorizontalStackLayout>
+                        <CheckBox x:Name="chk_gestante"
+                                  CheckedChanged="chk_gestante_CheckedChanged" />
+                        <Label Text="Gestante" />
+                    </HorizontalStackLayout>
+
+                    <VerticalStackLayout x:Name="layout_gestante"
+                                         IsVisible="False">
+
+                        <Label Text="Semanas de gestação:" />
+                        <Entry x:Name="entry_semanas_gestacao"
+                               Keyboard="Numeric" />
+
+                    </VerticalStackLayout>
+
+                    <HorizontalStackLayout>
+                        <CheckBox x:Name="chk_lactante"
+                                  CheckedChanged="chk_lactante_CheckedChanged" />
+                        <Label Text="Lactante" />
+                    </HorizontalStackLayout>
+
+                    <VerticalStackLayout x:Name="layout_lactante"
+                                         IsVisible="False">
+
+                        <HorizontalStackLayout>
+                            <CheckBox x:Name="chk_crianca_menor_6_meses" />
+                            <Label Text="Amamenta criança menor de 6 meses" />
+                        </HorizontalStackLayout>
+
+                    </VerticalStackLayout>
+
+                    <Button Text="Salvar Alterações"
+                            Clicked="Button_Salvar_Clicked" />
+
+                    <Button Text="Voltar"
+                            Clicked="Button_Voltar_Clicked"
+                            HorizontalOptions="Center" />
+
+                </VerticalStackLayout>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

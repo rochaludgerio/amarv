@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="maui_amarv.Views.RelatoriosPage"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{StaticResource Gray100}">
+
+    <Grid>
+
+        <Image Source="amarv_logo.png"
+               Opacity="0.06"
+               Aspect="AspectFit"
+               HorizontalOptions="Center"
+               VerticalOptions="Center" />
+
+        <Grid Padding="20"
+              RowDefinitions="Auto, Auto, Auto, *, Auto"
+              RowSpacing="12">
+
+            <Label Grid.Row="0"
+                   Text="Relatórios"
+                   FontSize="30"
+                   FontAttributes="Bold"
+                   TextColor="{StaticResource Primary}"
+                   HorizontalTextAlignment="Center" />
+
+            <Label Grid.Row="1"
+                   x:Name="lbl_perfil"
+                   TextColor="Black"
+                   FontSize="14"
+                   HorizontalTextAlignment="Center" />
+
+            <ScrollView Grid.Row="2">
+
+                <Frame Padding="15"
+                       BackgroundColor="White"
+                       BorderColor="#DDDDDD">
+
+                    <VerticalStackLayout Spacing="10">
+
+                        <VerticalStackLayout x:Name="area_usuario"
+                                             Spacing="10">
+
+                            <Label Text="Relatório do Usuário do Sistema"
+                                   FontSize="18"
+                                   FontAttributes="Bold"
+                                   TextColor="{StaticResource Primary}" />
+
+                            <Label Text="Paciente:" TextColor="Black" />
+
+                            <Picker x:Name="pck_paciente"
+                                    Title="Selecione o paciente"
+                                    ItemDisplayBinding="{Binding Nome}"
+                                    TextColor="Black"
+                                    TitleColor="Gray"
+                                    BackgroundColor="White" />
+
+                            <Button Text="Gerar Relatório de Situação Vacinal"
+                                    Clicked="Button_RelatorioPaciente_Clicked" />
+
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout x:Name="area_admin"
+                                             Spacing="10">
+
+                            <Label Text="Relatórios Administrativos"
+                                   FontSize="18"
+                                   FontAttributes="Bold"
+                                   TextColor="{StaticResource Primary}" />
+
+                            <Label Text="Filtro por rua:" TextColor="Black" />
+                            <Entry x:Name="entry_filtro_rua"
+                                   Placeholder="Digite a rua"
+                                   TextColor="Black"
+                                   PlaceholderColor="Gray"
+                                   BackgroundColor="White" />
+
+                            <Label Text="Filtro por idade:" TextColor="Black" />
+                            <Entry x:Name="entry_filtro_idade"
+                                   Placeholder="Digite a idade"
+                                   Keyboard="Numeric"
+                                   TextColor="Black"
+                                   PlaceholderColor="Gray"
+                                   BackgroundColor="White" />
+
+                            <Label Text="Filtro por nome da mãe:" TextColor="Black" />
+                            <Entry x:Name="entry_filtro_mae"
+                                   Placeholder="Digite o nome da mãe"
+                                   TextColor="Black"
+                                   PlaceholderColor="Gray"
+                                   BackgroundColor="White" />
+
+                            <Button Text="Pacientes com Vacinas Atrasadas/Pendentes"
+                                    Clicked="Button_Pendentes_Clicked" />
+
+                            <Button Text="Pacientes em Situação Regular"
+                                    Clicked="Button_Regulares_Clicked" />
+
+                            <Button Text="Relatório Geral"
+                                    Clicked="Button_Geral_Clicked" />
+
+                        </VerticalStackLayout>
+
+                        <HorizontalStackLayout HorizontalOptions="Center"
+                                               Spacing="8">
+
+                            <Button Text="Compartilhar"
+                                    Clicked="Button_Compartilhar_Clicked" />
+
+                            <Button Text="Imprimir"
+                                    Clicked="Button_Imprimir_Clicked" />
+
+                        </HorizontalStackLayout>
+
+                        <Button Text="Exportar Excel/CSV"
+                                Clicked="Button_Excel_Clicked" />
+
+                    </VerticalStackLayout>
+
+                </Frame>
+
+            </ScrollView>
+
+            <ScrollView Grid.Row="3">
+
+                <Frame Padding="15"
+                       BackgroundColor="White"
+                       BorderColor="#DDDDDD">
+
+                    <Label x:Name="lbl_relatorio"
+                           Text="Selecione uma opção para gerar o relatório."
+                           TextColor="Black"
+                           FontSize="15" />
+
+                </Frame>
+
+            </ScrollView>
+
+            <Button Grid.Row="4"
+                    Text="Voltar ao Menu"
+                    Clicked="Button_Menu_Clicked"
+                    HorizontalOptions="Center" />
+
+        </Grid>
+
+    </Grid>
+
+</ContentPage>
